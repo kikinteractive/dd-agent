@@ -154,6 +154,7 @@ class Redis(AgentCheck):
             raise
 
         latency_ms = round((time.time() - start) * 1000, 2)
+        tags = list(tags) + ["redis_role:" + info["role"]]
         self.gauge('redis.info.latency_ms', latency_ms, tags=tags)
 
         # Save the database statistics.
